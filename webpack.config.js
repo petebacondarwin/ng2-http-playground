@@ -22,10 +22,6 @@ module.exports = {
     ]
   },
   plugins: [
-    //new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      mangle: false
-    })
+    new webpack.optimize.DedupePlugin()
   ]
 };
