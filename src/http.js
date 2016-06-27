@@ -40,12 +40,12 @@ const ng2HttpModule = angular.module('ng2-http', [])
   };
 })
 
-.factory('ng2HttpBackend', function(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
+.factory('ng2HttpBackend', ['ng2HttpBrowser', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
   return new XHRBackend(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
-})
+}])
 
-.factory('ng2Http', function(ng2HttpBackend, ng2HttpRequestOptions) {
+.factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
   return new Http(ng2HttpBackend, ng2HttpRequestOptions);
-});
+}]);
 
 export default ng2HttpModule.name;

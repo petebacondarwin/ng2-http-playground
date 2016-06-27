@@ -1,19 +1,24 @@
+var webpack = require("webpack");
+
 module.exports = {
   devtool: 'sourcemap',
   entry: [
-    './src/app.ts'
+    './src/app.js'
   ],
   output: {
     path: './client',
     filename: 'app.js'
   },
-  resolve: {
-    extensions: ['', '.ts', '.js']
+  externals: {
+    angular: 'angular'
   },
   module: {
     loaders: [
-       { test: /\.js|ts$/, exclude: /node_modules/, loader: 'babel-loader' }
+       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ]
 };
