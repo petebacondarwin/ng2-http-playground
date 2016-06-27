@@ -1,34 +1,18 @@
-import angular from 'angular';
-
-import {
-  Http,
-  XHRBackend,
-  BrowserXhr,
-  ResponseOptions,
-  RequestOptions,
-  CookieXSRFStrategy
-} from '@angular/http';
-
-import {
-  BrowserDomAdapter
-} from '@angular/platform-browser/src/browser/browser_adapter';
-
 const ng2HttpModule = angular.module('ng2-http', [])
 
 .factory('ng2HttpBrowser', function() {
-  BrowserDomAdapter.makeCurrent();
-  return new BrowserXhr();
+  return new ng.http.BrowserXhr();
 })
 
 .provider('ng2HttpResponseOptions', function() {
   this.$get = function() {
-    return new ResponseOptions(this);
+    return new ng.http.ResponseOptions(this);
   };
 })
 
 .provider('ng2HttpRequestOptions', function() {
   this.$get = function() {
-    return new RequestOptions(this);
+    return new ng.http.RequestOptions(this);
   };
 })
 
@@ -36,16 +20,14 @@ const ng2HttpModule = angular.module('ng2-http', [])
   this.cookieName = 'MY-XSRF-COOKIE-NAME';
   this.headerName = 'X-MY-XSRF-HEADER-NAME';
   this.$get = function() {
-    return new CookieXSRFStrategy(this.cookieName, this.headerName);
+    return new ng.http.CookieXSRFStrategy(this.cookieName, this.headerName);
   };
 })
 
 .factory('ng2HttpBackend', ['ng2HttpBrowser', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
-  return new XHRBackend(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
+  return new ng.http.XHRBackend(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
 }])
 
 .factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
-  return new Http(ng2HttpBackend, ng2HttpRequestOptions);
+  return new ng.http.Http(ng2HttpBackend, ng2HttpRequestOptions);
 }]);
-
-export default ng2HttpModule.name;

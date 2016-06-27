@@ -2,12 +2,8 @@
   "name": "http-playground",
   "version": "1.0.0",
   "description": "Test project for HTTP",
-  "main": "client/app.js",
-  "jsnext:main": "lib/app.js",
   "scripts": {
-    "lite": "lite-server",
-    "webpack": "webpack --optimize-minimize",
-    "webpack-watch": "webpack -w"
+    "lite": "lite-server"
   },
   "author": "Pete Bacon Darwin",
   "license": "MIT",
@@ -18,22 +14,11 @@
     "@angular/http": "^2.0.0-rc.3",
     "@angular/platform-browser": "^2.0.0-rc.3",
     "angular": "^1.5.7",
-    "babel-runtime": "^6.9.2",
+    "reflect-metadata": "^0.1.3",
     "rxjs": "^5.0.0-beta.6",
     "zone.js": "^0.6.6"
   },
   "devDependencies": {
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-es2015-native-modules": "^6.6.0",
-    "babel-preset-es2015-rollup": "^1.1.1",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
-    "lite-server": "^2.2.0",
-    "reflect-metadata": "^0.1.3",
-    "webpack": "^2.1.0-beta.14",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "lite-server": "^2.2.0"
   }
 }
