@@ -18,7 +18,6 @@
     "@angular/http": "^2.0.0-rc.3",
     "@angular/platform-browser": "^2.0.0-rc.3",
     "angular": "^1.5.7",
-    "babel-polyfill": "^6.9.1",
     "babel-runtime": "^6.9.2",
     "rxjs": "^5.0.0-beta.6",
     "zone.js": "^0.6.6"
@@ -33,6 +32,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "lite-server": "^2.2.0",
+    "reflect-metadata": "^0.1.3",
     "webpack": "^2.1.0-beta.14",
     "webpack-dev-server": "^2.1.0-beta.0"
   }
