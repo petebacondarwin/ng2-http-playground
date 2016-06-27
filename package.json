@@ -6,10 +6,8 @@
   "jsnext:main": "lib/app.js",
   "scripts": {
     "lite": "lite-server",
-    "webpack": "webpack -c",
-    "webpack-watch": "webpack -c -w",
-    "rollup": "rollup -c",
-    "rollup-watch": "rollup -c -w"
+    "webpack": "webpack --optimize",
+    "webpack-watch": "webpack -w"
   },
   "author": "Pete Bacon Darwin",
   "license": "MIT",
@@ -26,7 +24,6 @@
     "zone.js": "^0.6.6"
   },
   "devDependencies": {
-    "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
@@ -34,27 +31,8 @@
     "babel-preset-es2015-rollup": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-    "babelrc-rollup": "^1.1.0",
-    "html-webpack-plugin": "^2.21.0",
-    "karma": "^0.13.22",
-    "karma-mocha": "^1.0.1",
-    "karma-mocha-reporter": "^2.0.4",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
     "lite-server": "^2.2.0",
-    "mocha": "^2.5.3",
-    "ng-annotate-loader": "^0.1.0",
-    "raw-loader": "^0.5.1",
-    "rollup": "^0.33.0",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^3.1.0",
-    "rollup-plugin-json": "^2.0.1",
-    "rollup-plugin-node-resolve": "^1.7.1",
-    "style-loader": "^0.13.1",
-    "ts-loader": "^0.8.2",
-    "typescript": "^1.8.10",
-    "typings": "^1.0.4",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^2.1.0-beta.14",
+    "webpack-dev-server": "^2.1.0-beta.0"
   }
 }
