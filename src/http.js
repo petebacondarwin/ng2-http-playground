@@ -1,14 +1,8 @@
-/* globals
-      root
-      ng1HttpModuleName
-      angular
-*/
+/* globals angular NG1_HTTP_MODULE_NAME http */
 
-const http = root.ng.http;
+angular.module(NG1_HTTP_MODULE_NAME, [])
 
-angular.module(ng1HttpModuleName, [])
-
-.factory('ng2HttpBrowser', function() {
+.factory('ng2BrowserXhr', function() {
   return new http.BrowserXhr();
 })
 
@@ -32,15 +26,10 @@ angular.module(ng1HttpModuleName, [])
   };
 })
 
-.factory('ng2HttpBackend', ['ng2HttpBrowser', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
-  return new http.XHRBackend(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
+.factory('ng2HttpBackend', ['ng2BrowserXhr', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
+  return new http.XHRBackend(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
 }])
 
 .factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
   return new http.Http(ng2HttpBackend, ng2HttpRequestOptions);
-}])
-
-.factory('ngJsonp', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
-  return new http.Jsonp(ng2HttpBackend, ng2HttpRequestOptions);
 }]);
-
