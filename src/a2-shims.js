@@ -1,10 +1,16 @@
-window.ng = {
+/* global root */
+
+root.ng = {
   // @Injectable shim
   core: { Injectable: {} },
   // Cookie shim
   platformBrowser: {
     __platform_browser_private__: {
-      getDOM: () => ({ getCookie: (cookieName) => parseCookieValue(document.cookie, cookieName) })
+      getDOM: function() {
+        return {
+          getCookie: function(cookieName) { return parseCookieValue(document.cookie, cookieName); }
+        };
+      }
     }
   }
 };
