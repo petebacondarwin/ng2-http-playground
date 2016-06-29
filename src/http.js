@@ -1,6 +1,12 @@
+/* globals
+      root
+      ng1HttpModuleName
+      angular
+*/
+
 const http = root.ng.http;
 
-const ng2HttpModule = angular.module('ng2-http', [])
+angular.module(ng1HttpModuleName, [])
 
 .factory('ng2HttpBrowser', function() {
   return new http.BrowserXhr();
@@ -32,4 +38,9 @@ const ng2HttpModule = angular.module('ng2-http', [])
 
 .factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
   return new http.Http(ng2HttpBackend, ng2HttpRequestOptions);
+}])
+
+.factory('ngJsonp', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
+  return new http.Jsonp(ng2HttpBackend, ng2HttpRequestOptions);
 }]);
+
