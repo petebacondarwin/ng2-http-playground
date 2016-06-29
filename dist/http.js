@@ -18,7 +18,7 @@
 
   // Create the "global" variable that will hold the dependencies that the
   // Angular 2 HTTP UMD module requires
-  const root = {
+  var root = {
     // Basic RxJS support is required by the library
     Rx: rxjs_Observable,
 
@@ -42,8 +42,8 @@
 
   // Override potential global variables that might cause the HTTP UMD module
   // to load libraries instead of using our shims
-  const exports = undefined;
-  const define = undefined;
+  var exports = undefined;
+  var define = undefined;
 
   // We are calling the `loadNg2HttpLib` function via `.call(...)` because we
   // need to set the `this` value for the UMD module, which allows us to
@@ -51,19 +51,14 @@
   // e.g. Angular 2 core and RxJS
   loadNg2HttpLib.call(root);
 
-  const ng1HttpModuleName = 'ng2-http';
+  // Define and register the new Angular 1 HTTP module
+  var NG1_HTTP_MODULE_NAME = 'ng2-http';
+  var http = root.ng.http;
+  /* globals angular NG1_HTTP_MODULE_NAME http */
 
-  /* globals
-      root
-      ng1HttpModuleName
-      angular
-*/
+angular.module(NG1_HTTP_MODULE_NAME, [])
 
-const http = root.ng.http;
-
-angular.module(ng1HttpModuleName, [])
-
-.factory('ng2HttpBrowser', function() {
+.factory('ng2BrowserXhr', function() {
   return new http.BrowserXhr();
 })
 
@@ -87,22 +82,16 @@ angular.module(ng1HttpModuleName, [])
   };
 })
 
-.factory('ng2HttpBackend', ['ng2HttpBrowser', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
-  return new http.XHRBackend(ng2HttpBrowser, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
+.factory('ng2HttpBackend', ['ng2BrowserXhr', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
+  return new http.XHRBackend(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
 }])
 
 .factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
   return new http.Http(ng2HttpBackend, ng2HttpRequestOptions);
-}])
-
-.factory('ngJsonp', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
-  return new http.Jsonp(ng2HttpBackend, ng2HttpRequestOptions);
 }]);
 
-
-
   // Return the name of the new Angular 1 module for use by clients, e.g. via RequireJS.
-  return ng1HttpModuleName;
+  return NG1_HTTP_MODULE_NAME;
 
   function loadNg2HttpLib() {
 
