@@ -4,7 +4,8 @@
   "description": "Test project for HTTP",
   "scripts": {
     "lite": "lite-server",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "watch": "watch \"npm run build\" src scripts"
   },
   "author": "Pete Bacon Darwin",
   "license": "MIT",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "lite-server": "^2.2.0",
-    "uglify-js": "^2.6.4"
+    "uglify-js": "^2.6.4",
+    "watch": "^0.19.1"
   }
 }
