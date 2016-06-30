@@ -2,34 +2,20 @@
 
 angular.module(NG1_HTTP_MODULE_NAME, [])
 
-.factory('ng2BrowserXhr', function() {
-  return new http.BrowserXhr();
-})
+.service('ng2HttpBrowserXhr', http.BrowserXhr)
 
-.provider('ng2HttpResponseOptions', function() {
-  this.$get = function() {
-    return new http.ResponseOptions(this);
-  };
-})
+.service('ng2HttpBaseResponseOptions', http.BaseResponseOptions)
 
-.provider('ng2HttpRequestOptions', function() {
-  this.$get = function() {
-    return new http.RequestOptions(this);
-  };
-})
+.service('ng2HttpBaseRequestOptions', http.BaseRequestOptions)
 
 .provider('ng2HttpXsrfStrategy', function() {
-  this.cookieName = 'MY-XSRF-COOKIE-NAME';
-  this.headerName = 'X-MY-XSRF-HEADER-NAME';
+  this.cookieName = 'NG2-HTTP-XSRF-COOKIE-NAME';
+  this.headerName = 'X-NG2-HTTP-XSRF-HEADER-NAME';
   this.$get = function() {
     return new http.CookieXSRFStrategy(this.cookieName, this.headerName);
   };
 })
 
-.factory('ng2HttpBackend', ['ng2BrowserXhr', 'ng2HttpResponseOptions', 'ng2HttpXsrfStrategy', function(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy) {
-  return new http.XHRBackend(ng2BrowserXhr, ng2HttpResponseOptions, ng2HttpXsrfStrategy);
-}])
+.service('ng2HttpBackend', ['ng2HttpBrowserXhr', 'ng2HttpBaseResponseOptions', 'ng2HttpXsrfStrategy', http.XHRBackend])
 
-.factory('ng2Http', ['ng2HttpBackend', 'ng2HttpRequestOptions', function(ng2HttpBackend, ng2HttpRequestOptions) {
-  return new http.Http(ng2HttpBackend, ng2HttpRequestOptions);
-}]);
+.service('ng2Http', ['ng2HttpBackend', 'ng2HttpBaseRequestOptions', http.Http]);
