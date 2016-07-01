@@ -16,9 +16,10 @@ const ng1HttpMod = fs.readFileSync(path.resolve(srcDir, 'http.js'), 'utf8');
 const ng2HttpLib = fs.readFileSync(path.resolve(httpLibDir, 'http.umd.js'), 'utf8');
 
 // Inject the source files into the placeholders
+// (we use a function to replace the placeholder to prevent accidental special replacement such as `$'`)
 const outputModule = modTemplate
-  .replace('//[[NG1_HTTP_MODULE]]//', ng1HttpMod)
-  .replace('//[[NG2_HTTP_LIBRARY]]//', ng2HttpLib);
+  .replace('//[[NG1_HTTP_MODULE]]//', () => ng1HttpMod)
+  .replace('//[[NG2_HTTP_LIBRARY]]//', () => ng2HttpLib);
 
 // Write the distributable library files
 console.log('writing library file to ' + distDir + '/http.js');
